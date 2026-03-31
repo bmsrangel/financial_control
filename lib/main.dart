@@ -1,6 +1,8 @@
-import 'dart:math';
+import 'dart:convert';
 
+import 'package:finance_control/src/ai_store.dart';
 import 'package:finance_control/src/image_picker_service.dart';
+import 'package:finance_control/src/model_download_store.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 
@@ -31,13 +33,48 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final int _counter = 0;
-
   void _incrementCounter() {
-    _imagePickerService.getImageFromCamera();
+    _imagePickerService.getImageFromCamera().then((path) async {
+      if (path != null) {
+        final inputImage = InputImage.fromFilePath(path);
+
+        final textRecognizer = TextRecognizer(
+          script: TextRecognitionScript.latin,
+        );
+        final RecognizedText recognizedText = await textRecognizer.processImage(
+          inputImage,
+        );
+
+        String text = recognizedText.text;
+        _aiStore.generateResponse(text);
+        textRecognizer.close();
+      }
+    });
   }
 
   final ImagePickerService _imagePickerService = ImagePickerService();
+  final ModelDownloadStore _downloadStore = ModelDownloadStore();
+  late final AiStore _aiStore = AiStore();
+
+  @override
+  void initState() {
+    super.initState();
+    _downloadStore.downloadModel();
+    _downloadStore.addListener(isModelDownloadedListener);
+  }
+
+  @override
+  void dispose() {
+    _downloadStore.removeListener(isModelDownloadedListener);
+    _aiStore.closeAi();
+    super.dispose();
+  }
+
+  void isModelDownloadedListener() {
+    if (_downloadStore.isModelDownloaded) {
+      _aiStore.init();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,15 +85,36 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: .center,
-          children: [
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+        child: AnimatedBuilder(
+          animation: _downloadStore,
+          builder: (_, _) {
+            if (_downloadStore.isLoading) {
+              return CircularProgressIndicator();
+            } else {
+              if (_downloadStore.isModelDownloaded) {
+                return Column(
+                  mainAxisAlignment: .center,
+                  children: [
+                    AnimatedBuilder(
+                      animation: _aiStore,
+                      builder: (_, _) {
+                        if (_aiStore.isLoading) {
+                          return CircularProgressIndicator();
+                        } else {
+                          return Text(jsonEncode(_aiStore.responseMap));
+                          // return Text(jsonEncode(_aiStore.responseMap));
+                        }
+                      },
+                    ),
+                  ],
+                );
+              } else {
+                return Text(
+                  'Downloading model: ${_downloadStore.progress.toStringAsFixed(2)}%',
+                );
+              }
+            }
+          },
         ),
       ),
       floatingActionButton: Row(
@@ -71,6 +129,7 @@ class _MyHomePageState extends State<MyHomePage> {
               _imagePickerService.getImageFromGallery().then((path) async {
                 if (path != null) {
                   final inputImage = InputImage.fromFilePath(path);
+
                   final textRecognizer = TextRecognizer(
                     script: TextRecognitionScript.latin,
                   );
@@ -78,19 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       .processImage(inputImage);
 
                   String text = recognizedText.text;
-                  for (TextBlock block in recognizedText.blocks) {
-                    final Rect rect = block.boundingBox;
-                    final List<Point<int>> cornerPoints = block.cornerPoints;
-                    final String text = block.text;
-                    final List<String> languages = block.recognizedLanguages;
-
-                    for (TextLine line in block.lines) {
-                      // Same getters as TextBlock
-                      for (TextElement element in line.elements) {
-                        // Same getters as TextBlock
-                      }
-                    }
-                  }
+                  _aiStore.generateResponse(text);
                   textRecognizer.close();
                 }
               });

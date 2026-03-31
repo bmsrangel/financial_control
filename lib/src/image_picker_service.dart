@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:image_picker/image_picker.dart';
 
 class ImagePickerService {
@@ -9,9 +7,9 @@ class ImagePickerService {
 
   late final ImagePicker _imagePicker;
 
-  Future<Uint8List?> getImageFromCamera() async {
+  Future<String?> getImageFromCamera() async {
     final file = await _imagePicker.pickImage(source: ImageSource.camera);
-    return await file?.readAsBytes();
+    return file?.path;
   }
 
   Future<String?> getImageFromGallery() async {

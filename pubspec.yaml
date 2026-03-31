@@ -37,6 +37,10 @@ dependencies:
   flutter_gemma: ^0.12.6
   google_mlkit_text_recognition: ^0.15.1
   image_picker: ^1.2.1
+  dio: ^5.9.2
+  ai_edge: ^0.2.0
+  path_provider: ^2.1.5
+  path: ^1.9.1
 
 dev_dependencies:
   flutter_test:
