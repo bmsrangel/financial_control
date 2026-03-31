@@ -17,6 +17,7 @@ class ModelDownloadStore extends ChangeNotifier {
   StreamSubscription<double>? progressStream;
   String? error;
 
+  // TODO: implement resume logic, in case download is interrupted by internet connection or app is closed
   Future<void> downloadModel() async {
     isLoading = true;
     error = null;
