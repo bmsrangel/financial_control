@@ -41,11 +41,11 @@ class AiService {
     final prompt =
         """
 Classifique o estabelecimento "$locationName" em UMA destas categorias:
-- Alimentação
-- Lazer
-- Transporte
-- Saúde
-- Outros
+- Alimentação (restaurantes, supermercados, padarias, lanchonetes)
+- Lazer (livrarias, cinemas, shoppings, jogos, cultura)
+- Transporte (postos de combustível, estacionamentos, uber, pedágio)
+- Saúde (farmácias, hospitais, clínicas)
+- Outros (qualquer coisa que não se encaixe acima)
 
 Responda APENAS o nome da categoria exata, sem explicações.
 Categoria:

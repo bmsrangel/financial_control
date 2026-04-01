@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "574257044381",
+    "firebase_url": "https://controlefinanceiroapp-f6b00.firebaseio.com",
+    "project_id": "controlefinanceiroapp-f6b00",
+    "storage_bucket": "controlefinanceiroapp-f6b00.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:574257044381:android:f4893dca2798599186ad74",
+        "android_client_info": {
+          "package_name": "br.com.bmsrangel.dev.controlefinanceiroapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "574257044381-qr3687illnm1gpbae001m3mk0ql3p6dj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8Edr1G8XPyQZ9axw5aJOZaQmILTi6eEw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "574257044381-qr3687illnm1gpbae001m3mk0ql3p6dj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "574257044381-maiim6hc70qkr1mrh6u8fgbmhj3kbjan.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "br.com.bmsrangel.dev.controlefinanceiroapp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:574257044381:android:4ce0f8fbeeeb0ed586ad74",
+        "android_client_info": {
+          "package_name": "br.com.bmsrangel.dev.finance_control"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "574257044381-qr3687illnm1gpbae001m3mk0ql3p6dj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8Edr1G8XPyQZ9axw5aJOZaQmILTi6eEw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "574257044381-qr3687illnm1gpbae001m3mk0ql3p6dj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "574257044381-maiim6hc70qkr1mrh6u8fgbmhj3kbjan.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "br.com.bmsrangel.dev.controlefinanceiroapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -59,16 +59,47 @@ class AiStore extends ChangeNotifier {
         .where((l) => l.isNotEmpty)
         .toList();
 
+    final blockedWords = [
+      'CNPJ',
+      'IE:',
+      'CPF',
+      'INSC',
+      'CÓDIGO',
+      'CODIGO',
+      'DESCRIÇÃO',
+      'DESCRICAO',
+      'QTD',
+      'UN',
+      'VL',
+      'VALOR',
+      'UNIT',
+      'TOTAL',
+      'ITEM',
+      'DOCUMENTO AUXILIAR',
+      'DANFE',
+      'NFC-E',
+      'NF-E',
+      'CUPOM FISCAL',
+      'EXTRATO',
+      'CONSUMIDOR',
+      'RUA',
+      'AVENIDA',
+      'AV.',
+      'PRAÇA',
+      'RODOVIA',
+      'ENDEREÇO',
+    ];
+
     for (var line in lines) {
       String lineUpper = line.toUpperCase();
-      // Ignora lixo comum de cabeçalho de nota fiscal
-      if (lineUpper.contains('CNPJ') || lineUpper.contains('IE:')) continue;
+      if (lineUpper.length < 3) continue;
       if (lineUpper.contains(RegExp(r'\d{2}\.\d{3}'))) {
         continue; // Formato de CNPJ
       }
-      if (line.length < 3) continue;
+      bool isTrash = blockedWords.any((termo) => lineUpper.startsWith(termo));
 
-      // A primeira linha que sobreviver a esse filtro é quase 100% de chance de ser o nome do local
+      if (isTrash) continue;
+
       return line;
     }
     return "Estabelecimento Desconhecido";
