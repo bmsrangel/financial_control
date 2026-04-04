@@ -47,8 +47,10 @@ class ModelDownloadStore extends ChangeNotifier {
               notifyListeners();
             },
             onDone: () {
+              if (error != null) {
+                isModelDownloaded = true;
+              }
               progressStream = null;
-              isModelDownloaded = true;
               isDownloadInProgress = false;
               notifyListeners();
             },

@@ -1,10 +1,14 @@
 import 'dart:convert';
 
 import 'package:finance_control/src/ai_store.dart';
+import 'package:finance_control/src/auth/auth_store.dart';
+import 'package:finance_control/src/auth/google_sign_in_service.dart';
 import 'package:finance_control/src/image_picker_service.dart';
 import 'package:finance_control/src/model_download_store.dart';
+import 'package:finance_control/src/pages/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +22,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MultiProvider(
+        providers: [
+          Provider(create: (_) => GoogleSignInService()),
+          ChangeNotifierProvider(
+            create: (context) => AuthStore(context.read<GoogleSignInService>()),
+          ),
+        ],
+        child: SplashPage(),
+      ),
     );
   }
 }
@@ -59,8 +71,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    _downloadStore.downloadModel();
     _downloadStore.addListener(isModelDownloadedListener);
+    _downloadStore.downloadModel();
   }
 
   @override
