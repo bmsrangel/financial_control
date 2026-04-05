@@ -13,7 +13,7 @@ class ModelDownloadService {
     final controller = StreamController<double>();
     _dio
         .download(
-          'https://github.com/bmsrangel/financial_control/releases/download/v1.0.0-model/gemma3-1B-it-int4.task',
+          'https://github.com/bmsrangel/financial_control_model/releases/download/v1.0.0-model/gemma3-1B-it-int4.task',
           modelPath,
           onReceiveProgress: (count, total) {
             if (total != -1) {
