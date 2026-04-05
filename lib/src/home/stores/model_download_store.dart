@@ -1,14 +1,16 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:finance_control/src/constants.dart';
-import 'package:finance_control/src/model_downloader.dart';
+import 'package:finance_control/src/core/utils/constants.dart';
+import 'package:finance_control/src/home/services/model_download_service.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
 class ModelDownloadStore extends ChangeNotifier {
-  final _modelDownloader = ModelDownloader();
+  ModelDownloadStore(this._modelDownloader);
+
+  final ModelDownloadService _modelDownloader;
 
   bool isModelDownloaded = false;
   bool isDownloadInProgress = false;

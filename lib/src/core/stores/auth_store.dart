@@ -1,5 +1,6 @@
-import 'package:finance_control/src/auth/google_sign_in_service.dart';
 import 'package:flutter/material.dart';
+
+import '../services/google_sign_in_service.dart';
 
 class AuthStore extends ChangeNotifier {
   AuthStore(this._signInService);
@@ -19,6 +20,11 @@ class AuthStore extends ChangeNotifier {
 
   Future<void> login() async {
     isUserLogged = await _signInService.signIn();
+    await _signInService.checkGrantedScopes();
     notifyListeners();
+  }
+
+  String? getToken() {
+    return _signInService.getToken();
   }
 }

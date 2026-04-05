@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "574257044381-2055162hp6j4msl3s4r0lhjg8k9io564.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.bmsrangel.dev.controlefinanceiroapp",
+            "certificate_hash": "7994eabdd397d2be2b8befe876f354fb24e7b7a4"
+          }
+        },
+        {
           "client_id": "574257044381-qr3687illnm1gpbae001m3mk0ql3p6dj.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -50,6 +58,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "574257044381-jckpr5epd6478t4hk4t8tlr7abisic64.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.bmsrangel.dev.finance_control",
+            "certificate_hash": "acd8a2bffcec81dc3d8a93faadb295710db249b9"
+          }
+        },
         {
           "client_id": "574257044381-qr3687illnm1gpbae001m3mk0ql3p6dj.apps.googleusercontent.com",
           "client_type": 3

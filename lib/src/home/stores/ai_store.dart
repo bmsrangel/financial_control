@@ -1,8 +1,9 @@
-import 'package:finance_control/src/ai_service.dart';
-import 'package:finance_control/src/constants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+
+import '../../core/utils/constants.dart';
+import '../services/ai_service.dart';
 
 class AiStore extends ChangeNotifier {
   AiStore() {
@@ -14,7 +15,7 @@ class AiStore extends ChangeNotifier {
   String response = '';
   bool isLoading = false;
   String _modelPath = '';
-  Map responseMap = {};
+  Map<String, dynamic> responseMap = {};
 
   Future<void> init() async {
     isLoading = true;

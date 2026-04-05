@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 
-class ModelDownloader {
-  ModelDownloader() {
+class ModelDownloadService {
+  ModelDownloadService() {
     _dio = Dio();
   }
 
